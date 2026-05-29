@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel | Addons Underworld</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#050505;
+
+    color:white;
+
+    font-family:'Press Start 2P', cursive;
+
+    overflow-x:hidden;
+}
+
+/* ========================= */
+/* FONDO */
+/* ========================= */
+
+#background{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    z-index:-10;
+
+    background:
+    radial-gradient(circle at center,
+    rgba(120,0,255,0.12),
+    transparent 60%),
+
+    linear-gradient(
+    180deg,
+    #020202,
+    #120018,
+    #050505
+    );
+
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+header{
+
+    padding:30px;
+
+    text-align:center;
+
+    border-bottom:
+    2px solid rgba(255,255,255,0.08);
+
+    background:
+    rgba(0,0,0,0.5);
+
+    backdrop-filter:blur(10px);
+}
+
+#title{
+
+    color:#c77dff;
+
+    font-size:24px;
+
+    text-shadow:
+    0 0 10px #9d4edd,
+    0 0 30px #c77dff;
+}
+
+/* ========================= */
+/* PANEL */
+/* ========================= */
+
+#panel{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:40px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+}
+
+/* ========================= */
+/* INPUTS */
+/* ========================= */
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:14px;
+
+    background:#111;
+
+    color:white;
+
+    font-family:'Press Start 2P', cursive;
+
+    font-size:10px;
+}
+
+textarea{
+
+    min-height:140px;
+
+    resize:vertical;
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+
+button{
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+    135deg,
+    #7b2cbf,
+    #c77dff
+    );
+
+    color:white;
+
+    font-family:'Press Start 2P', cursive;
+
+    font-size:10px;
+
+    transition:0.3s;
+}
+
+button:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+    0 0 30px rgba(199,125,255,0.4);
+}
+
+/* ========================= */
+/* LISTA */
+/* ========================= */
+
+#modsList{
+
+    margin-top:40px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+}
+
+.modItem{
+
+    background:
+    rgba(20,20,20,0.95);
+
+    border:
+    2px solid rgba(255,255,255,0.08);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+}
+
+.modName{
+
+    color:#55ff55;
+
+    font-size:14px;
+}
+
+/* ========================= */
+/* ACCIONES */
+/* ========================= */
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.delete{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff0055,
+    #ff4d88
+    );
+}
+
+.verify{
+
+    background:
+    linear-gradient(
+    135deg,
+    #00aa55,
+    #55ff55
+    );
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:768px){
+
+    #panel{
+        padding:20px;
+    }
+
+    .modItem{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<header>
+
+<div id="title">
+UNDERWORLD ADMIN PANEL
+</div>
+
+</header>
+
+<section id="panel">
+
+<input
+type="text"
+id="modTitle"
+placeholder="MOD TITLE"
+>
+
+<textarea
+id="modDescription"
+placeholder="MOD DESCRIPTION"
+></textarea>
+
+<input
+type="text"
+id="modImage"
+placeholder="IMAGE URL"
+>
+
+<input
+type="text"
+id="modVideo"
+placeholder="YOUTUBE EMBED URL"
+>
+
+<select id="modType">
+
+<option value="java">
+JAVA
+</option>
+
+<option value="bedrock">
+BEDROCK
+</option>
+
+</select>
+
+<button id="publish">
+PUBLISH MOD
+</button>
+
+<div id="modsList"></div>
+
+</section>
+
+<script>
+
+/* ========================= */
+/* GUARDAR */
+/* ========================= */
+
+let mods =
+JSON.parse(
+localStorage.getItem("underworldMods")
+) || [];
+
+/* ========================= */
+/* RENDER */
+/* ========================= */
+
+function renderMods(){
+
+    const modsList =
+    document.getElementById("modsList");
+
+    modsList.innerHTML = "";
+
+    mods.forEach((mod,index)=>{
+
+        modsList.innerHTML += `
+
+        <div class="modItem">
+
+            <div>
+
+                <div class="modName">
+                ${mod.title}
+                </div>
+
+                <div style="
+                margin-top:15px;
+                font-size:8px;
+                opacity:0.7;
+                line-height:1.8;
+                ">
+
+                ${mod.description}
+
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                class="verify"
+                onclick="verifyMod(${index})"
+                >
+                VERIFY
+                </button>
+
+                <button
+                class="delete"
+                onclick="deleteMod(${index})"
+                >
+                DELETE
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+/* ========================= */
+/* PUBLICAR */
+/* ========================= */
+
+document.getElementById("publish")
+.onclick = ()=>{
+
+    const title =
+    document.getElementById("modTitle").value;
+
+    const description =
+    document.getElementById("modDescription").value;
+
+    const image =
+    document.getElementById("modImage").value;
+
+    const video =
+    document.getElementById("modVideo").value;
+
+    const type =
+    document.getElementById("modType").value;
+
+    if(
+        title === "" ||
+        description === ""
+    ){
+
+        alert("COMPLETE ALL FIELDS");
+
+        return;
+    }
+
+    mods.push({
+
+        title,
+        description,
+        image,
+        video,
+        type,
+        verified:false
+
+    });
+
+    localStorage.setItem(
+    "underworldMods",
+    JSON.stringify(mods)
+    );
+
+    renderMods();
+
+    alert("MOD PUBLISHED");
+
+};
+
+/* ========================= */
+/* ELIMINAR */
+/* ========================= */
+
+function deleteMod(index){
+
+    mods.splice(index,1);
+
+    localStorage.setItem(
+    "underworldMods",
+    JSON.stringify(mods)
+    );
+
+    renderMods();
+
+}
+
+/* ========================= */
+/* VERIFICAR */
+/* ========================= */
+
+function verifyMod(index){
+
+    mods[index].verified = true;
+
+    localStorage.setItem(
+    "underworldMods",
+    JSON.stringify(mods)
+    );
+
+    renderMods();
+
+    alert("MOD VERIFIED");
+
+}
+
+/* ========================= */
+/* INICIAR */
+/* ========================= */
+
+renderMods();
+
+</script>
+
+</body>
+</html>
