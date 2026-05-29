@@ -6,543 +6,78 @@
 
 <title>Addons Underworld</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-    overflow:hidden;
-    background:black;
-    font-family:'Press Start 2P', cursive;
-}
-
-/* ========================= */
-/* FONDO */
-/* ========================= */
-
-#animatedBackground{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-
-    background:
-    radial-gradient(circle at center,
-    rgba(120,0,255,0.3),
-    transparent 60%),
-
-    linear-gradient(
-    180deg,
-    #030303,
-    #120018,
-    #220022,
-    #050505
-    );
-
-    z-index:-20;
-
-    animation:bgPulse 8s infinite alternate;
-}
-
-#animatedBackground::before{
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
-
-    background:
-    repeating-linear-gradient(
-    45deg,
-    rgba(255,255,255,0.02) 0px,
-    rgba(255,255,255,0.02) 2px,
-    transparent 2px,
-    transparent 50px
-    );
-
-    animation:gridMove 20s linear infinite;
-}
-
-/* ========================= */
-/* ESTRELLAS */
-/* ========================= */
-
-.star{
-    position:absolute;
-    background:white;
-    border-radius:50%;
-    animation:twinkle infinite alternate;
-}
-
-@keyframes twinkle{
-    from{
-        opacity:0.2;
-    }
-
-    to{
-        opacity:1;
-    }
-}
-
-/* ========================= */
-/* PARTÍCULAS */
-/* ========================= */
-
-.particle{
-    position:absolute;
-    border-radius:50%;
-    animation:float linear infinite;
-}
-
-@keyframes float{
-
-    from{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    to{
-        transform:translateY(-100vh);
-        opacity:0;
-    }
-
-}
-
-/* ========================= */
-/* PORTAL */
-/* ========================= */
-
-#portal{
-    position:absolute;
-    width:260px;
-    height:420px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%, -50%);
-
-    border:10px solid #6a00ff;
-
-    box-shadow:
-    0 0 30px #9d4edd,
-    0 0 60px #9d4edd,
-    0 0 100px #c77dff;
-
-    animation:portalPulse 3s infinite;
-}
-
-/* PORTAL INTERNO */
-
-#portal::before{
-    content:"";
-
-    position:absolute;
-    width:100%;
-    height:100%;
-
-    background:
-    linear-gradient(
-    180deg,
-    rgba(140,0,255,0.5),
-    rgba(90,0,200,0.6),
-    rgba(20,0,40,0.8)
-    );
-
-    animation:portalMove 2s infinite alternate;
-}
-
-/* ========================= */
-/* LOGO */
-/* ========================= */
-
-#logoContainer{
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%, -50%);
-
+    margin:0;
+    font-family:'Press Start 2P';
+    background:linear-gradient(180deg,#000,#0a0a0a);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
     text-align:center;
-
-    opacity:0;
-
-    animation:showLogo 4s forwards;
-    animation-delay:2s;
 }
 
-#logo{
+.container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
 
+button{
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:'Press Start 2P';
+    color:white;
+}
+
+.login{background:#7b2cbf;}
+.enter{background:#00aa55;}
+
+h1{
     color:#55ff55;
-
-    font-size:4vw;
-
-    text-shadow:
-    0 0 10px #55ff55,
-    0 0 30px #00ff99,
-    0 0 50px #00ff99;
-
-    letter-spacing:6px;
-
-    animation:logoGlow 3s infinite alternate;
-}
-
-#subtitle{
-
-    color:white;
-
-    margin-top:30px;
-
-    font-size:1vw;
-
-    opacity:0.8;
-}
-
-/* ========================= */
-/* TEXTO DE CARGA */
-/* ========================= */
-
-#loading{
-
-    position:absolute;
-
-    bottom:50px;
-
-    width:100%;
-
-    text-align:center;
-
-    color:white;
-
-    font-size:12px;
-
-    opacity:0.7;
-
-    animation:blink 1s infinite;
-}
-
-/* ========================= */
-/* FLASH */
-/* ========================= */
-
-#flash{
-
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    background:white;
-
-    opacity:0;
-
-    animation:flash 2s ease;
-}
-
-/* ========================= */
-/* TRANSICIÓN */
-/* ========================= */
-
-#transition{
-
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    background:black;
-
-    opacity:0;
-
-    z-index:999;
-
-    pointer-events:none;
-}
-
-/* ========================= */
-/* ANIMACIONES */
-/* ========================= */
-
-@keyframes bgPulse{
-
-    from{
-        transform:scale(1);
-        filter:brightness(1);
-    }
-
-    to{
-        transform:scale(1.08);
-        filter:brightness(1.3);
-    }
-
-}
-
-@keyframes gridMove{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(-200px,-200px);
-    }
-
-}
-
-@keyframes portalPulse{
-
-    0%{
-        box-shadow:
-        0 0 30px #9d4edd,
-        0 0 60px #9d4edd;
-    }
-
-    50%{
-        box-shadow:
-        0 0 60px #c77dff,
-        0 0 120px #c77dff;
-    }
-
-    100%{
-        box-shadow:
-        0 0 30px #9d4edd,
-        0 0 60px #9d4edd;
-    }
-
-}
-
-@keyframes portalMove{
-
-    from{
-        filter:hue-rotate(0deg);
-    }
-
-    to{
-        filter:hue-rotate(40deg);
-    }
-
-}
-
-@keyframes showLogo{
-
-    0%{
-        opacity:0;
-        transform:translate(-50%, -40%) scale(0.5);
-    }
-
-    100%{
-        opacity:1;
-        transform:translate(-50%, -50%) scale(1);
-    }
-
-}
-
-@keyframes logoGlow{
-
-    from{
-        text-shadow:
-        0 0 10px #55ff55,
-        0 0 30px #00ff99;
-    }
-
-    to{
-        text-shadow:
-        0 0 20px #55ff55,
-        0 0 50px #00ff99,
-        0 0 80px #00ff99;
-    }
-
-}
-
-@keyframes flash{
-
-    0%{
-        opacity:0;
-    }
-
-    50%{
-        opacity:0.5;
-    }
-
-    100%{
-        opacity:0;
-    }
-
-}
-
-@keyframes blink{
-
-    from{
-        opacity:0.3;
-    }
-
-    to{
-        opacity:1;
-    }
-
-}
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
-
-@media(max-width:768px){
-
-    #logo{
-        font-size:8vw;
-    }
-
-    #subtitle{
-        font-size:2vw;
-    }
-
-    #portal{
-        width:180px;
-        height:300px;
-    }
-
+    text-shadow:0 0 20px #55ff55;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="animatedBackground"></div>
+<div class="container">
 
-<div id="flash"></div>
+<h1>ADDONS UNDERWORLD</h1>
 
-<div id="portal"></div>
+<button class="login" onclick="location.href='login.html'">
+INICIAR SESIÓN
+</button>
 
-<div id="logoContainer">
-
-<div id="logo">
-ADDONS<br>UNDERWORLD
-</div>
-
-<div id="subtitle">
-JAVA • BEDROCK • COMMUNITY
-</div>
+<button class="enter" onclick="go()">
+ENTRAR SIN CUENTA
+</button>
 
 </div>
-
-<div id="loading">
-LOADING UNDERWORLD...
-</div>
-
-<div id="transition"></div>
 
 <script>
 
-/* ========================= */
-/* ESTRELLAS */
-/* ========================= */
+function go(){
 
-for(let i=0;i<120;i++){
+    const user = localStorage.getItem("user");
 
-    const star = document.createElement("div");
-
-    star.classList.add("star");
-
-    let size = Math.random()*3;
-
-    star.style.width = size+"px";
-    star.style.height = size+"px";
-
-    star.style.left = Math.random()*100+"vw";
-    star.style.top = Math.random()*100+"vh";
-
-    star.style.animationDuration =
-    (Math.random()*3+1)+"s";
-
-    document.body.appendChild(star);
+    if(!user){
+        location.href = "login.html";
+    } else {
+        location.href = "menu.html";
+    }
 
 }
-
-/* ========================= */
-/* PARTÍCULAS */
-/* ========================= */
-
-for(let i=0;i<180;i++){
-
-    const particle = document.createElement("div");
-
-    particle.classList.add("particle");
-
-    let size = Math.random()*6+2;
-
-    particle.style.width = size+"px";
-    particle.style.height = size+"px";
-
-    particle.style.left = Math.random()*100+"vw";
-
-    particle.style.background =
-    `hsl(${Math.random()*100+250},100%,70%)`;
-
-    particle.style.boxShadow =
-    `0 0 20px currentColor`;
-
-    particle.style.animationDuration =
-    (Math.random()*10+5)+"s";
-
-    particle.style.opacity = Math.random();
-
-    document.body.appendChild(particle);
-
-}
-
-/* ========================= */
-/* SONIDO */
-/* ========================= */
-
-const audio = new Audio(
-"https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e6b5e4.mp3?filename=ambient-110397.mp3"
-);
-
-audio.volume = 0.4;
-
-window.addEventListener("click", ()=>{
-
-    audio.play();
-
-},{once:true});
-
-/* ========================= */
-/* TRANSICIÓN */
-/* ========================= */
-
-setTimeout(()=>{
-
-    document.getElementById("transition")
-    .style.transition = "3s";
-
-    document.getElementById("transition")
-    .style.opacity = "1";
-
-},12000);
-
-/* ========================= */
-/* IR AL MENÚ */
-/* ========================= */
-
-setTimeout(()=>{
-
-    window.location.href = "menu.html";
-
-},15000);
 
 </script>
 
