@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bedrock Mods | Addons Underworld</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050505;
+    color:white;
+    font-family:'Press Start 2P', cursive;
+    overflow-x:hidden;
+}
+
+/* ========================= */
+/* FONDO */
+/* ========================= */
+
+#background{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    z-index:-10;
+
+    background:
+    radial-gradient(circle at center,
+    rgba(0,180,255,0.08),
+    transparent 60%),
+
+    linear-gradient(
+    180deg,
+    #020202,
+    #001522,
+    #050505
+    );
+
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+header{
+
+    width:100%;
+
+    padding:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    border-bottom:2px solid rgba(255,255,255,0.08);
+
+    background:rgba(0,0,0,0.4);
+
+    backdrop-filter:blur(10px);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+}
+
+#logo{
+
+    color:#00b4ff;
+
+    font-size:24px;
+
+    text-shadow:
+    0 0 10px #00b4ff,
+    0 0 30px #00d9ff;
+}
+
+/* ========================= */
+/* BUSCADOR */
+/* ========================= */
+
+#search{
+
+    padding:15px;
+
+    width:320px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:#111;
+
+    color:white;
+
+    font-family:'Press Start 2P', cursive;
+
+    font-size:10px;
+}
+
+/* ========================= */
+/* CONTENEDOR */
+/* ========================= */
+
+#modsContainer{
+
+    padding:50px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:40px;
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.modCard{
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(20,20,20,0.95),
+    rgba(5,5,5,0.98)
+    );
+
+    border:3px solid rgba(255,255,255,0.08);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:0.3s;
+
+    position:relative;
+
+    box-shadow:
+    0 0 20px rgba(0,180,255,0.08);
+}
+
+.modCard:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 0 40px rgba(0,180,255,0.2);
+}
+
+/* ========================= */
+/* IMAGEN */
+/* ========================= */
+
+.modImage{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+}
+
+/* ========================= */
+/* INFO */
+/* ========================= */
+
+.modInfo{
+
+    padding:25px;
+}
+
+.modTitle{
+
+    color:#00b4ff;
+
+    font-size:16px;
+
+    margin-bottom:20px;
+}
+
+.modDescription{
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    opacity:0.8;
+
+    margin-bottom:25px;
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+
+.buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.modButton{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-family:'Press Start 2P', cursive;
+
+    font-size:8px;
+
+    transition:0.2s;
+}
+
+.download{
+
+    background:#0077cc;
+}
+
+.favorite{
+
+    background:#8844ff;
+}
+
+.like{
+
+    background:#ff3366;
+}
+
+.modButton:hover{
+
+    transform:scale(1.05);
+}
+
+/* ========================= */
+/* ESTRELLAS */
+/* ========================= */
+
+.stars{
+
+    margin-top:20px;
+
+    color:gold;
+
+    font-size:14px;
+}
+
+/* ========================= */
+/* VIDEO */
+/* ========================= */
+
+iframe{
+
+    width:100%;
+
+    height:200px;
+
+    border:none;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:768px){
+
+    header{
+
+        flex-direction:column;
+
+        gap:20px;
+    }
+
+    #search{
+        width:100%;
+    }
+
+    #modsContainer{
+        padding:20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<header>
+
+<div id="logo">
+BEDROCK MODS
+</div>
+
+<input
+type="text"
+id="search"
+placeholder="SEARCH MODS..."
+>
+
+</header>
+
+<section id="modsContainer">
+
+<div class="modCard">
+
+<img
+class="modImage"
+src="https://picsum.photos/500/300?random=3"
+>
+
+<div class="modInfo">
+
+<div class="modTitle">
+RTX TEXTURES
+</div>
+
+<div class="modDescription">
+High quality RTX textures with reflections and HD blocks.
+</div>
+
+<iframe
+src="https://www.youtube.com/embed/qq-RGFyaq0U">
+</iframe>
+
+<div class="stars">
+★★★★★
+</div>
+
+<div class="buttons">
+
+<button class="modButton download">
+DOWNLOAD
+</button>
+
+<button class="modButton favorite">
+FAVORITE
+</button>
+
+<button class="modButton like">
+LIKE
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modCard">
+
+<img
+class="modImage"
+src="https://picsum.photos/500/300?random=4"
+>
+
+<div class="modInfo">
+
+<div class="modTitle">
+MOBILE UI+
+</div>
+
+<div class="modDescription">
+Improves mobile HUD, controls and interface.
+</div>
+
+<iframe
+src="https://www.youtube.com/embed/5qap5aO4i9A">
+</iframe>
+
+<div class="stars">
+★★★★☆
+</div>
+
+<div class="buttons">
+
+<button class="modButton download">
+DOWNLOAD
+</button>
+
+<button class="modButton favorite">
+FAVORITE
+</button>
+
+<button class="modButton like">
+LIKE
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* ========================= */
+/* BUSCADOR */
+/* ========================= */
+
+const search =
+document.getElementById("search");
+
+search.addEventListener("input",()=>{
+
+    const value =
+    search.value.toLowerCase();
+
+    document.querySelectorAll(".modCard")
+    .forEach(card=>{
+
+        const text =
+        card.innerText.toLowerCase();
+
+        card.style.display =
+        text.includes(value)
+        ? "block"
+        : "none";
+
+    });
+
+});
+
+/* ========================= */
+/* DESCARGAS */
+/* ========================= */
+
+document.querySelectorAll(".download")
+.forEach(button=>{
+
+    button.onclick = ()=>{
+
+        let time = 10;
+
+        button.innerText =
+        "WAIT "+time+"s";
+
+        const interval =
+        setInterval(()=>{
+
+            time--;
+
+            button.innerText =
+            "WAIT "+time+"s";
+
+            if(time<=0){
+
+                clearInterval(interval);
+
+                button.innerText =
+                "DOWNLOAD";
+
+                alert("DOWNLOAD STARTED");
+
+            }
+
+        },1000);
+
+    };
+
+});
+
+</script>
+
+</body>
+</html>
