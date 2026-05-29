@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bedrock Mods | Addons Underworld</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
@@ -18,9 +20,13 @@
 }
 
 body{
+
     background:#050505;
+
     color:white;
+
     font-family:'Press Start 2P', cursive;
+
     overflow-x:hidden;
 }
 
@@ -135,7 +141,7 @@ header{
 }
 
 /* ========================= */
-/* CARD */
+/* CARDS */
 /* ========================= */
 
 .modCard{
@@ -212,6 +218,23 @@ header{
 }
 
 /* ========================= */
+/* VIDEO */
+/* ========================= */
+
+iframe{
+
+    width:100%;
+
+    height:200px;
+
+    border:none;
+
+    border-radius:10px;
+
+    margin-bottom:20px;
+}
+
+/* ========================= */
 /* BOTONES */
 /* ========================= */
 
@@ -246,17 +269,14 @@ header{
 }
 
 .download{
-
     background:#0077cc;
 }
 
 .favorite{
-
     background:#8844ff;
 }
 
 .like{
-
     background:#ff3366;
 }
 
@@ -279,21 +299,45 @@ header{
 }
 
 /* ========================= */
-/* VIDEO */
+/* CONTADORES */
 /* ========================= */
 
-iframe{
+.counter{
 
-    width:100%;
+    margin-top:15px;
 
-    height:200px;
+    font-size:8px;
 
-    border:none;
+    opacity:0.7;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:10px;
 }
 
 /* ========================= */
-/* RESPONSIVE */
+/* BOTÓN ADMIN */
 /* ========================= */
+
+#secretLCK{
+
+    position:fixed;
+
+    bottom:10px;
+
+    right:10px;
+
+    width:20px;
+    height:20px;
+
+    opacity:0;
+
+    z-index:999;
+}
 
 @media(max-width:768px){
 
@@ -315,6 +359,7 @@ iframe{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -362,49 +407,20 @@ src="https://www.youtube.com/embed/qq-RGFyaq0U">
 ★★★★★
 </div>
 
-<div class="buttons">
+<div class="counter">
 
-<button class="modButton download">
-DOWNLOAD
-</button>
-
-<button class="modButton favorite">
-FAVORITE
-</button>
-
-<button class="modButton like">
-LIKE
-</button>
-
+<div>
+❤️ 220
 </div>
 
+<div>
+⭐ 170
 </div>
 
+<div>
+⬇️ 600
 </div>
 
-<div class="modCard">
-
-<img
-class="modImage"
-src="https://picsum.photos/500/300?random=4"
->
-
-<div class="modInfo">
-
-<div class="modTitle">
-MOBILE UI+
-</div>
-
-<div class="modDescription">
-Improves mobile HUD, controls and interface.
-</div>
-
-<iframe
-src="https://www.youtube.com/embed/5qap5aO4i9A">
-</iframe>
-
-<div class="stars">
-★★★★☆
 </div>
 
 <div class="buttons">
@@ -428,6 +444,18 @@ LIKE
 </div>
 
 </section>
+
+<button id="secretLCK"></button>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+<script src="firebase-config.js"></script>
 
 <script>
 
@@ -472,6 +500,8 @@ document.querySelectorAll(".download")
         button.innerText =
         "WAIT "+time+"s";
 
+        button.disabled = true;
+
         const interval =
         setInterval(()=>{
 
@@ -487,6 +517,8 @@ document.querySelectorAll(".download")
                 button.innerText =
                 "DOWNLOAD";
 
+                button.disabled = false;
+
                 alert("DOWNLOAD STARTED");
 
             }
@@ -496,6 +528,61 @@ document.querySelectorAll(".download")
     };
 
 });
+
+/* ========================= */
+/* FAVORITOS */
+/* ========================= */
+
+document.querySelectorAll(".favorite")
+.forEach(button=>{
+
+    button.onclick = ()=>{
+
+        button.innerText =
+        "FAVORITED";
+
+    };
+
+});
+
+/* ========================= */
+/* LIKES */
+/* ========================= */
+
+document.querySelectorAll(".like")
+.forEach(button=>{
+
+    button.onclick = ()=>{
+
+        button.innerText =
+        "LIKED";
+
+    };
+
+});
+
+/* ========================= */
+/* ADMIN */
+/* ========================= */
+
+document.getElementById("secretLCK")
+.onclick = ()=>{
+
+    const code =
+    prompt("ENTER LCK");
+
+    if(code==="LCK-UNDERWORLD"){
+
+        alert("ADMIN ACCESS");
+
+        window.location.href =
+        "admin.html";
+
+    }
+
+};
+
+console.log("Firebase Connected");
 
 </script>
 
