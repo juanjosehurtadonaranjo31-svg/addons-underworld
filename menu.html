@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Addons Underworld</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    overflow:hidden;
+
+    font-family:'Press Start 2P', cursive;
+
+    background:black;
+
+    color:white;
+}
+
+/* ========================= */
+/* FONDO */
+/* ========================= */
+
+#background{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    background:
+    radial-gradient(circle at center,
+    rgba(120,0,255,0.25),
+    transparent 60%),
+
+    linear-gradient(
+    180deg,
+    #020202,
+    #120018,
+    #1f001f,
+    #020202
+    );
+
+    z-index:-20;
+
+    animation:bgPulse 10s infinite alternate;
+}
+
+#background::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:200%;
+    height:200%;
+
+    background:
+    repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.02) 0px,
+    rgba(255,255,255,0.02) 2px,
+    transparent 2px,
+    transparent 40px
+    );
+
+    animation:gridMove 25s linear infinite;
+}
+
+/* ========================= */
+/* ESTRELLAS */
+/* ========================= */
+
+.star{
+
+    position:absolute;
+
+    background:white;
+
+    border-radius:50%;
+
+    animation:twinkle infinite alternate;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:0.2;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+/* ========================= */
+/* PARTÍCULAS */
+/* ========================= */
+
+.particle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    animation:float linear infinite;
+}
+
+@keyframes float{
+
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-100vh);
+        opacity:0;
+    }
+
+}
+
+/* ========================= */
+/* LOGO */
+/* ========================= */
+
+#logo{
+
+    position:absolute;
+
+    top:8%;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:3vw;
+
+    color:#55ff55;
+
+    text-shadow:
+    0 0 10px #55ff55,
+    0 0 30px #00ff99,
+    0 0 60px #00ff99;
+
+    animation:logoGlow 3s infinite alternate;
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+
+#menu{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%, -50%);
+
+    display:flex;
+
+    gap:80px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+}
+
+.menuButton{
+
+    width:320px;
+    height:180px;
+
+    border:none;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    color:white;
+
+    font-size:28px;
+
+    font-family:'Press Start 2P', cursive;
+
+    transition:0.3s;
+
+    border:6px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+    0 0 20px rgba(255,255,255,0.1),
+    inset 0 0 20px rgba(255,255,255,0.05);
+}
+
+/* JAVA */
+
+#java{
+
+    background:
+    linear-gradient(
+    135deg,
+    #1e5631,
+    #55ff55
+    );
+}
+
+/* BEDROCK */
+
+#bedrock{
+
+    background:
+    linear-gradient(
+    135deg,
+    #003566,
+    #00b4ff
+    );
+}
+
+/* HOVER */
+
+.menuButton:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+    0 0 30px rgba(255,255,255,0.4),
+    0 0 60px rgba(255,255,255,0.2);
+
+}
+
+/* EFECTO INTERNO */
+
+.menuButton::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:200%;
+    height:200%;
+
+    background:
+    linear-gradient(
+    45deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+    );
+
+    transform:rotate(45deg);
+
+    animation:shine 4s infinite;
+}
+
+/* ========================= */
+/* TEXTO ABAJO */
+/* ========================= */
+
+#bottomText{
+
+    position:absolute;
+
+    bottom:30px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:12px;
+
+    opacity:0.7;
+}
+
+/* ========================= */
+/* TRANSICIÓN */
+/* ========================= */
+
+#transition{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    background:black;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:999;
+}
+
+/* ========================= */
+/* ANIMACIONES */
+/* ========================= */
+
+@keyframes bgPulse{
+
+    from{
+        transform:scale(1);
+        filter:brightness(1);
+    }
+
+    to{
+        transform:scale(1.05);
+        filter:brightness(1.3);
+    }
+
+}
+
+@keyframes gridMove{
+
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(-200px,-200px);
+    }
+
+}
+
+@keyframes logoGlow{
+
+    from{
+        text-shadow:
+        0 0 10px #55ff55,
+        0 0 30px #00ff99;
+    }
+
+    to{
+        text-shadow:
+        0 0 20px #55ff55,
+        0 0 50px #00ff99,
+        0 0 80px #00ff99;
+    }
+
+}
+
+@keyframes shine{
+
+    from{
+        transform:translateX(-100%) rotate(45deg);
+    }
+
+    to{
+        transform:translateX(100%) rotate(45deg);
+    }
+
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:900px){
+
+    #logo{
+        font-size:8vw;
+    }
+
+    .menuButton{
+
+        width:260px;
+        height:140px;
+
+        font-size:20px;
+    }
+
+    #menu{
+        gap:30px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<div id="logo">
+ADDONS UNDERWORLD
+</div>
+
+<div id="menu">
+
+<button class="menuButton" id="java">
+JAVA
+</button>
+
+<button class="menuButton" id="bedrock">
+BEDROCK
+</button>
+
+</div>
+
+<div id="bottomText">
+SELECT YOUR WORLD
+</div>
+
+<div id="transition"></div>
+
+<script>
+
+/* ========================= */
+/* ESTRELLAS */
+/* ========================= */
+
+for(let i=0;i<100;i++){
+
+    const star = document.createElement("div");
+
+    star.classList.add("star");
+
+    let size = Math.random()*3;
+
+    star.style.width = size+"px";
+    star.style.height = size+"px";
+
+    star.style.left = Math.random()*100+"vw";
+    star.style.top = Math.random()*100+"vh";
+
+    star.style.animationDuration =
+    (Math.random()*3+1)+"s";
+
+    document.body.appendChild(star);
+
+}
+
+/* ========================= */
+/* PARTÍCULAS */
+/* ========================= */
+
+for(let i=0;i<140;i++){
+
+    const particle = document.createElement("div");
+
+    particle.classList.add("particle");
+
+    let size = Math.random()*6+2;
+
+    particle.style.width = size+"px";
+    particle.style.height = size+"px";
+
+    particle.style.left = Math.random()*100+"vw";
+
+    particle.style.background =
+    `hsl(${Math.random()*100+250},100%,70%)`;
+
+    particle.style.boxShadow =
+    `0 0 20px currentColor`;
+
+    particle.style.animationDuration =
+    (Math.random()*10+5)+"s";
+
+    particle.style.opacity = Math.random();
+
+    document.body.appendChild(particle);
+
+}
+
+/* ========================= */
+/* SONIDO */
+/* ========================= */
+
+const hoverSound = new Audio(
+"https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"
+);
+
+document.querySelectorAll(".menuButton")
+.forEach(button=>{
+
+    button.addEventListener("mouseenter",()=>{
+
+        hoverSound.currentTime = 0;
+
+        hoverSound.play();
+
+    });
+
+});
+
+/* ========================= */
+/* TRANSICIONES */
+/* ========================= */
+
+function transitionTo(page){
+
+    const transition =
+    document.getElementById("transition");
+
+    transition.style.transition = "2s";
+
+    transition.style.opacity = "1";
+
+    setTimeout(()=>{
+
+        window.location.href = page;
+
+    },2000);
+
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+
+document.getElementById("java")
+.onclick = ()=>{
+
+    transitionTo("java.html");
+
+};
+
+document.getElementById("bedrock")
+.onclick = ()=>{
+
+    transitionTo("bedrock.html");
+
+};
+
+</script>
+
+</body>
+</html>
