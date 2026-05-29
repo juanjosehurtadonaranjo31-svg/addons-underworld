@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Java Mods | Addons Underworld</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>
+Java Mods | Addons Underworld
+</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+rel="stylesheet">
 
 <style>
 
+/* ========================= */
+/* RESET */
+/* ========================= */
+
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
 body{
@@ -28,10 +41,11 @@ body{
     font-family:'Press Start 2P', cursive;
 
     overflow-x:hidden;
+
 }
 
 /* ========================= */
-/* FONDO */
+/* BACKGROUND */
 /* ========================= */
 
 #background{
@@ -44,9 +58,12 @@ body{
     z-index:-10;
 
     background:
-    radial-gradient(circle at center,
+
+    radial-gradient(
+    circle at center,
     rgba(0,255,100,0.08),
-    transparent 60%),
+    transparent 60%
+    ),
 
     linear-gradient(
     180deg,
@@ -75,9 +92,11 @@ header{
 
     flex-wrap:wrap;
 
-    border-bottom:2px solid rgba(255,255,255,0.08);
+    border-bottom:
+    2px solid rgba(255,255,255,0.08);
 
-    background:rgba(0,0,0,0.4);
+    background:
+    rgba(0,0,0,0.4);
 
     backdrop-filter:blur(10px);
 
@@ -86,6 +105,7 @@ header{
     top:0;
 
     z-index:100;
+
 }
 
 #logo{
@@ -95,12 +115,14 @@ header{
     font-size:24px;
 
     text-shadow:
+
     0 0 10px #55ff55,
     0 0 30px #00ff99;
+
 }
 
 /* ========================= */
-/* BUSCADOR */
+/* SEARCH */
 /* ========================= */
 
 #search{
@@ -122,10 +144,11 @@ header{
     font-family:'Press Start 2P', cursive;
 
     font-size:10px;
+
 }
 
 /* ========================= */
-/* CONTENEDOR */
+/* MODS CONTAINER */
 /* ========================= */
 
 #modsContainer{
@@ -138,10 +161,11 @@ header{
     repeat(auto-fit,minmax(320px,1fr));
 
     gap:40px;
+
 }
 
 /* ========================= */
-/* CARDS */
+/* MOD CARD */
 /* ========================= */
 
 .modCard{
@@ -153,7 +177,8 @@ header{
     rgba(5,5,5,0.98)
     );
 
-    border:3px solid rgba(255,255,255,0.08);
+    border:
+    3px solid rgba(255,255,255,0.08);
 
     border-radius:20px;
 
@@ -165,6 +190,7 @@ header{
 
     box-shadow:
     0 0 20px rgba(0,255,100,0.08);
+
 }
 
 .modCard:hover{
@@ -173,10 +199,11 @@ header{
 
     box-shadow:
     0 0 40px rgba(0,255,100,0.2);
+
 }
 
 /* ========================= */
-/* IMAGEN */
+/* IMAGE */
 /* ========================= */
 
 .modImage{
@@ -186,6 +213,7 @@ header{
     height:220px;
 
     object-fit:cover;
+
 }
 
 /* ========================= */
@@ -195,6 +223,7 @@ header{
 .modInfo{
 
     padding:25px;
+
 }
 
 .modTitle{
@@ -204,6 +233,7 @@ header{
     font-size:16px;
 
     margin-bottom:20px;
+
 }
 
 .modDescription{
@@ -215,6 +245,7 @@ header{
     opacity:0.8;
 
     margin-bottom:25px;
+
 }
 
 /* ========================= */
@@ -232,10 +263,11 @@ iframe{
     border-radius:10px;
 
     margin-bottom:20px;
+
 }
 
 /* ========================= */
-/* BOTONES */
+/* BUTTONS */
 /* ========================= */
 
 .buttons{
@@ -245,6 +277,7 @@ iframe{
     gap:10px;
 
     flex-wrap:wrap;
+
 }
 
 .modButton{
@@ -266,27 +299,35 @@ iframe{
     font-size:8px;
 
     transition:0.2s;
+
 }
 
 .download{
+
     background:#00aa55;
+
 }
 
 .favorite{
+
     background:#8844ff;
+
 }
 
 .like{
+
     background:#ff3366;
+
 }
 
 .modButton:hover{
 
     transform:scale(1.05);
+
 }
 
 /* ========================= */
-/* ESTRELLAS */
+/* STARS */
 /* ========================= */
 
 .stars{
@@ -296,10 +337,11 @@ iframe{
     color:gold;
 
     font-size:14px;
+
 }
 
 /* ========================= */
-/* CONTADORES */
+/* COUNTER */
 /* ========================= */
 
 .counter{
@@ -317,10 +359,11 @@ iframe{
     flex-wrap:wrap;
 
     gap:10px;
+
 }
 
 /* ========================= */
-/* BOTÓN ADMIN */
+/* SECRET ADMIN */
 /* ========================= */
 
 #secretLCK{
@@ -332,11 +375,13 @@ iframe{
     right:10px;
 
     width:20px;
+
     height:20px;
 
     opacity:0;
 
     z-index:999;
+
 }
 
 /* ========================= */
@@ -350,14 +395,19 @@ iframe{
         flex-direction:column;
 
         gap:20px;
+
     }
 
     #search{
+
         width:100%;
+
     }
 
     #modsContainer{
+
         padding:20px;
+
     }
 
 }
@@ -373,7 +423,9 @@ iframe{
 <header>
 
 <div id="logo">
+
 JAVA MODS
+
 </div>
 
 <input
@@ -385,133 +437,6 @@ placeholder="SEARCH MODS..."
 </header>
 
 <section id="modsContainer">
-
-<!-- MOD 1 -->
-
-<div class="modCard">
-
-<img
-class="modImage"
-src="https://picsum.photos/500/300?random=1"
->
-
-<div class="modInfo">
-
-<div class="modTitle">
-REALISTIC SHADERS
-</div>
-
-<div class="modDescription">
-Ultra realistic shaders with dynamic lighting,
-reflections and shadows.
-</div>
-
-<iframe
-src="https://www.youtube.com/embed/1La4QzGeaaQ">
-</iframe>
-
-<div class="stars">
-★★★★★
-</div>
-
-<div class="counter">
-
-<div>
-❤️ 120
-</div>
-
-<div>
-⭐ 98
-</div>
-
-<div>
-⬇️ 340
-</div>
-
-</div>
-
-<div class="buttons">
-
-<button class="modButton download">
-DOWNLOAD
-</button>
-
-<button class="modButton favorite">
-FAVORITE
-</button>
-
-<button class="modButton like">
-LIKE
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- MOD 2 -->
-
-<div class="modCard">
-
-<img
-class="modImage"
-src="https://picsum.photos/500/300?random=2"
->
-
-<div class="modInfo">
-
-<div class="modTitle">
-UNDERWORLD BIOMES
-</div>
-
-<div class="modDescription">
-Adds corrupted biomes, dark forests and new mobs.
-</div>
-
-<iframe
-src="https://www.youtube.com/embed/WzdbBnS0Umk">
-</iframe>
-
-<div class="stars">
-★★★★☆
-</div>
-
-<div class="counter">
-
-<div>
-❤️ 89
-</div>
-
-<div>
-⭐ 44
-</div>
-
-<div>
-⬇️ 210
-</div>
-
-</div>
-
-<div class="buttons">
-
-<button class="modButton download">
-DOWNLOAD
-</button>
-
-<button class="modButton favorite">
-FAVORITE
-</button>
-
-<button class="modButton like">
-LIKE
-</button>
-
-</div>
-
-</div>
-
-</div>
 
 </section>
 
@@ -538,7 +463,225 @@ LIKE
 <script>
 
 /* ========================= */
-/* BUSCADOR */
+/* CONTAINER */
+/* ========================= */
+
+const modsContainer =
+document.getElementById("modsContainer");
+
+/* ========================= */
+/* RENDER MODS */
+/* ========================= */
+
+db.collection("mods")
+
+.where("type","==","java")
+
+.orderBy("createdAt","desc")
+
+.onSnapshot(snapshot=>{
+
+    modsContainer.innerHTML = "";
+
+    snapshot.forEach(doc=>{
+
+        const mod =
+        doc.data();
+
+        modsContainer.innerHTML += `
+
+        <div class="modCard">
+
+            <img
+            class="modImage"
+            src="${mod.image}"
+            >
+
+            <div class="modInfo">
+
+                <div class="modTitle">
+
+                ${mod.title}
+
+                </div>
+
+                <div class="modDescription">
+
+                ${mod.description}
+
+                </div>
+
+                <iframe
+                src="${mod.video}">
+                </iframe>
+
+                <div class="stars">
+
+                ★★★★★
+
+                </div>
+
+                <div class="counter">
+
+                    <div>
+                    ❤️ ${mod.likes || 0}
+                    </div>
+
+                    <div>
+                    ⭐ ${mod.favorites || 0}
+                    </div>
+
+                    <div>
+                    ⬇️ ${mod.downloads || 0}
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <button
+                    class="modButton download"
+                    onclick="downloadMod('${doc.id}')"
+                    >
+
+                    DOWNLOAD
+
+                    </button>
+
+                    <button
+                    class="modButton favorite"
+                    onclick="favoriteMod('${doc.id}')"
+                    >
+
+                    FAVORITE
+
+                    </button>
+
+                    <button
+                    class="modButton like"
+                    onclick="likeMod('${doc.id}')"
+                    >
+
+                    LIKE
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+});
+
+/* ========================= */
+/* LIKE */
+/* ========================= */
+
+async function likeMod(id){
+
+    const ref =
+    db.collection("mods").doc(id);
+
+    const docSnap =
+    await ref.get();
+
+    const likes =
+    (docSnap.data().likes || 0) + 1;
+
+    await ref.update({
+
+        likes:likes
+
+    });
+
+}
+
+/* ========================= */
+/* FAVORITE */
+/* ========================= */
+
+async function favoriteMod(id){
+
+    const ref =
+    db.collection("mods").doc(id);
+
+    const docSnap =
+    await ref.get();
+
+    const favorites =
+    (docSnap.data().favorites || 0) + 1;
+
+    await ref.update({
+
+        favorites:favorites
+
+    });
+
+}
+
+/* ========================= */
+/* DOWNLOAD */
+/* ========================= */
+
+async function downloadMod(id){
+
+    const button =
+    event.target;
+
+    let time = 10;
+
+    button.innerText =
+    "WAIT "+time+"s";
+
+    button.disabled = true;
+
+    const interval =
+    setInterval(async ()=>{
+
+        time--;
+
+        button.innerText =
+        "WAIT "+time+"s";
+
+        if(time<=0){
+
+            clearInterval(interval);
+
+            button.innerText =
+            "DOWNLOAD";
+
+            button.disabled = false;
+
+            const ref =
+            db.collection("mods").doc(id);
+
+            const docSnap =
+            await ref.get();
+
+            const downloads =
+            (docSnap.data().downloads || 0) + 1;
+
+            await ref.update({
+
+                downloads:downloads
+
+            });
+
+            alert("DOWNLOAD STARTED");
+
+        }
+
+    },1000);
+
+}
+
+/* ========================= */
+/* SEARCH */
 /* ========================= */
 
 const search =
@@ -550,14 +693,18 @@ search.addEventListener("input",()=>{
     search.value.toLowerCase();
 
     document.querySelectorAll(".modCard")
+
     .forEach(card=>{
 
         const text =
         card.innerText.toLowerCase();
 
         card.style.display =
+
         text.includes(value)
+
         ? "block"
+
         : "none";
 
     });
@@ -565,82 +712,7 @@ search.addEventListener("input",()=>{
 });
 
 /* ========================= */
-/* DESCARGAS */
-/* ========================= */
-
-document.querySelectorAll(".download")
-.forEach(button=>{
-
-    button.onclick = ()=>{
-
-        let time = 10;
-
-        button.innerText =
-        "WAIT "+time+"s";
-
-        button.disabled = true;
-
-        const interval =
-        setInterval(()=>{
-
-            time--;
-
-            button.innerText =
-            "WAIT "+time+"s";
-
-            if(time<=0){
-
-                clearInterval(interval);
-
-                button.innerText =
-                "DOWNLOAD";
-
-                button.disabled = false;
-
-                alert("DOWNLOAD STARTED");
-
-            }
-
-        },1000);
-
-    };
-
-});
-
-/* ========================= */
-/* FAVORITOS */
-/* ========================= */
-
-document.querySelectorAll(".favorite")
-.forEach(button=>{
-
-    button.onclick = ()=>{
-
-        button.innerText =
-        "FAVORITED";
-
-    };
-
-});
-
-/* ========================= */
-/* LIKES */
-/* ========================= */
-
-document.querySelectorAll(".like")
-.forEach(button=>{
-
-    button.onclick = ()=>{
-
-        button.innerText =
-        "LIKED";
-
-    };
-
-});
-
-/* ========================= */
-/* ADMIN */
+/* SECRET ADMIN */
 /* ========================= */
 
 document.getElementById("secretLCK")
@@ -661,7 +733,7 @@ document.getElementById("secretLCK")
 };
 
 /* ========================= */
-/* FIREBASE TEST */
+/* FIREBASE STATUS */
 /* ========================= */
 
 console.log("Firebase Connected");
