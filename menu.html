@@ -2,66 +2,42 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Addons Underworld</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<title>Menu</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-
-    overflow:hidden;
-
-    font-family:'Press Start 2P', cursive;
-
-    background:black;
-
-    color:white;
+font-family:sans-serif;
+background:#111;
+color:white;
+text-align:center;
+padding-top:100px;
 }
 
-/* ========================= */
-/* FONDO */
-/* ========================= */
-
-#background{
-
-    position:fixed;
-
-    width:100%;
-    height:100%;
-
-    background:
-    radial-gradient(circle at center,
-    rgba(120,0,255,0.25),
-    transparent 60%),
-
-    linear-gradient(
-    180deg,
-    #020202,
-    #120018,
-    #1f001f,
-    #020202
-    );
-
-    z-index:-20;
-
-    animation:bgPulse 10s infinite alternate;
+button{
+padding:20px;
+margin:20px;
+font-size:18px;
+cursor:pointer;
 }
+</style>
+</head>
 
-#background::before{
+<body>
 
-    content:"";
+<h1>SELECT VERSION</h1>
 
-    position:absolute;
+<button onclick="location.href='java.html'">JAVA</button>
+
+<button onclick="location.href='bedrock.html'">BEDROCK</button>
+
+<script>
+if(!localStorage.getItem("user")){
+location.href="login.html";
+}
+</script>
+
+</body>
+</html>    position:absolute;
 
     width:200%;
     height:200%;
