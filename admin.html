@@ -1,512 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Panel | Addons Underworld</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<title>Admin Panel</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-
-    background:#050505;
-
-    color:white;
-
-    font-family:'Press Start 2P', cursive;
-
-    overflow-x:hidden;
+font-family:sans-serif;
+background:#111;
+color:white;
+padding:20px;
 }
 
-/* ========================= */
-/* FONDO */
-/* ========================= */
-
-#background{
-
-    position:fixed;
-
-    width:100%;
-    height:100%;
-
-    z-index:-10;
-
-    background:
-    radial-gradient(circle at center,
-    rgba(140,0,255,0.15),
-    transparent 60%),
-
-    linear-gradient(
-    180deg,
-    #020202,
-    #120018,
-    #050505
-    );
-
+input,select{
+display:block;
+margin:10px 0;
+padding:10px;
+width:100%;
 }
-
-/* ========================= */
-/* HEADER */
-/* ========================= */
-
-header{
-
-    width:100%;
-
-    padding:30px;
-
-    text-align:center;
-
-    border-bottom:
-    2px solid rgba(255,255,255,0.08);
-
-    background:
-    rgba(0,0,0,0.4);
-
-    backdrop-filter:blur(10px);
-}
-
-#title{
-
-    color:#c77dff;
-
-    font-size:24px;
-
-    text-shadow:
-    0 0 10px #9d4edd,
-    0 0 30px #c77dff;
-}
-
-/* ========================= */
-/* PANEL */
-/* ========================= */
-
-#panel{
-
-    width:90%;
-    max-width:900px;
-
-    margin:auto;
-
-    padding:40px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
-}
-
-/* ========================= */
-/* INPUTS */
-/* ========================= */
-
-input,
-textarea,
-select{
-
-    width:100%;
-
-    padding:18px;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:14px;
-
-    background:#111;
-
-    color:white;
-
-    font-family:'Press Start 2P', cursive;
-
-    font-size:10px;
-}
-
-textarea{
-
-    min-height:160px;
-
-    resize:vertical;
-}
-
-/* ========================= */
-/* BOTONES */
-/* ========================= */
-
-button{
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    color:white;
-
-    font-family:'Press Start 2P', cursive;
-
-    font-size:10px;
-
-    transition:0.3s;
-}
-
-#publishBtn{
-
-    background:
-    linear-gradient(
-    135deg,
-    #7b2cbf,
-    #c77dff
-    );
-}
-
-.deleteBtn{
-
-    background:
-    linear-gradient(
-    135deg,
-    #ff0055,
-    #ff4d88
-    );
-}
-
-button:hover{
-
-    transform:scale(1.03);
-
-    box-shadow:
-    0 0 30px rgba(255,255,255,0.2);
-}
-
-/* ========================= */
-/* MODS */
-/* ========================= */
-
-#modsList{
-
-    margin-top:40px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-}
-
-.modCard{
-
-    background:
-    rgba(15,15,15,0.95);
-
-    border:
-    2px solid rgba(255,255,255,0.08);
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-.modImage{
-
-    width:100%;
-
-    height:240px;
-
-    object-fit:cover;
-}
-
-.modInfo{
-
-    padding:25px;
-}
-
-.modTitle{
-
-    color:#55ff55;
-
-    font-size:14px;
-
-    margin-bottom:20px;
-}
-
-.modDescription{
-
-    font-size:8px;
-
-    line-height:1.8;
-
-    opacity:0.8;
-
-    margin-bottom:20px;
-}
-
-iframe{
-
-    width:100%;
-
-    height:220px;
-
-    border:none;
-
-    border-radius:10px;
-
-    margin-bottom:20px;
-}
-
-.modType{
-
-    margin-bottom:20px;
-
-    color:#c77dff;
-
-    font-size:8px;
-}
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
-
-@media(max-width:768px){
-
-    #panel{
-        padding:20px;
-    }
-
-}
-
 </style>
 
 </head>
 
 <body>
 
-<div id="background"></div>
+<h1>ADMIN PANEL</h1>
 
-<header>
+<input id="title" placeholder="Titulo">
+<input id="desc" placeholder="Descripcion">
+<input id="image" placeholder="Imagen URL">
+<input id="video" placeholder="Video URL">
 
-<div id="title">
-UNDERWORLD ADMIN PANEL
-</div>
-
-</header>
-
-<section id="panel">
-
-<input
-type="text"
-id="modTitle"
-placeholder="MOD TITLE"
->
-
-<textarea
-id="modDescription"
-placeholder="MOD DESCRIPTION"
-></textarea>
-
-<input
-type="text"
-id="modImage"
-placeholder="IMAGE URL"
->
-
-<input
-type="text"
-id="modVideo"
-placeholder="YOUTUBE EMBED URL"
->
-
-<select id="modType">
-
-<option value="java">
-JAVA
-</option>
-
-<option value="bedrock">
-BEDROCK
-</option>
-
+<select id="type">
+<option value="java">Java</option>
+<option value="bedrock">Bedrock</option>
 </select>
 
-<button id="publishBtn">
-PUBLISH MOD
-</button>
-
-<div id="modsList"></div>
-
-</section>
-
-<!-- ========================= -->
-<!-- FIREBASE -->
-<!-- ========================= -->
+<button onclick="upload()">Subir Mod</button>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script src="firebase-config.js"></script>
 
 <script>
 
-/* ========================= */
-/* LCK */
-/* ========================= */
+function upload(){
 
-const lck =
-prompt("ENTER LCK");
+db.collection("mods").add({
 
-if(lck !== "LCK-UNDERWORLD"){
-
-    alert("ACCESS DENIED");
-
-    window.location.href =
-    "menu.html";
-
-}
-
-/* ========================= */
-/* PUBLICAR */
-/* ========================= */
-
-document.getElementById("publishBtn")
-.onclick = async ()=>{
-
-    const title =
-    document.getElementById("modTitle").value;
-
-    const description =
-    document.getElementById("modDescription").value;
-
-    const image =
-    document.getElementById("modImage").value;
-
-    const video =
-    document.getElementById("modVideo").value;
-
-    const type =
-    document.getElementById("modType").value;
-
-    if(
-        title === "" ||
-        description === ""
-    ){
-
-        alert("COMPLETE ALL FIELDS");
-
-        return;
-    }
-
-    await db.collection("mods")
-    .add({
-
-        title,
-        description,
-        image,
-        video,
-        type,
-        likes:0,
-        favorites:0,
-        downloads:0,
-        createdAt:
-        new Date()
-
-    });
-
-    alert("MOD PUBLISHED");
-
-};
-
-/* ========================= */
-/* RENDER MODS */
-/* ========================= */
-
-db.collection("mods")
-.orderBy("createdAt","desc")
-
-.onSnapshot(snapshot=>{
-
-    const modsList =
-    document.getElementById("modsList");
-
-    modsList.innerHTML = "";
-
-    snapshot.forEach(doc=>{
-
-        const mod =
-        doc.data();
-
-        modsList.innerHTML += `
-
-        <div class="modCard">
-
-            <img
-            class="modImage"
-            src="${mod.image}"
-            >
-
-            <div class="modInfo">
-
-                <div class="modTitle">
-                ${mod.title}
-                </div>
-
-                <div class="modDescription">
-                ${mod.description}
-                </div>
-
-                <div class="modType">
-                ${mod.type.toUpperCase()}
-                </div>
-
-                <iframe
-                src="${mod.video}">
-                </iframe>
-
-                <button
-                class="deleteBtn"
-                onclick="deleteMod('${doc.id}')"
-                >
-                DELETE
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
+title:title.value,
+description:desc.value,
+image:image.value,
+video:video.value,
+type:type.value,
+likes:0,
+favorites:0,
+downloads:0,
+createdAt:Date.now()
 
 });
 
-/* ========================= */
-/* DELETE */
-/* ========================= */
-
-async function deleteMod(id){
-
-    await db.collection("mods")
-    .doc(id)
-    .delete();
-
-    alert("MOD DELETED");
+alert("MOD SUBIDO");
 
 }
 
