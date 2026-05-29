@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Admin Panel | Addons Underworld</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
@@ -43,7 +45,7 @@ body{
 
     background:
     radial-gradient(circle at center,
-    rgba(120,0,255,0.12),
+    rgba(140,0,255,0.15),
     transparent 60%),
 
     linear-gradient(
@@ -61,6 +63,8 @@ body{
 
 header{
 
+    width:100%;
+
     padding:30px;
 
     text-align:center;
@@ -69,7 +73,7 @@ header{
     2px solid rgba(255,255,255,0.08);
 
     background:
-    rgba(0,0,0,0.5);
+    rgba(0,0,0,0.4);
 
     backdrop-filter:blur(10px);
 }
@@ -91,6 +95,7 @@ header{
 
 #panel{
 
+    width:90%;
     max-width:900px;
 
     margin:auto;
@@ -133,7 +138,7 @@ select{
 
 textarea{
 
-    min-height:140px;
+    min-height:160px;
 
     resize:vertical;
 }
@@ -152,13 +157,6 @@ button{
 
     cursor:pointer;
 
-    background:
-    linear-gradient(
-    135deg,
-    #7b2cbf,
-    #c77dff
-    );
-
     color:white;
 
     font-family:'Press Start 2P', cursive;
@@ -168,16 +166,36 @@ button{
     transition:0.3s;
 }
 
+#publishBtn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #7b2cbf,
+    #c77dff
+    );
+}
+
+.deleteBtn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff0055,
+    #ff4d88
+    );
+}
+
 button:hover{
 
     transform:scale(1.03);
 
     box-shadow:
-    0 0 30px rgba(199,125,255,0.4);
+    0 0 30px rgba(255,255,255,0.2);
 }
 
 /* ========================= */
-/* LISTA */
+/* MODS */
 /* ========================= */
 
 #modsList{
@@ -191,67 +209,73 @@ button:hover{
     gap:20px;
 }
 
-.modItem{
+.modCard{
 
     background:
-    rgba(20,20,20,0.95);
+    rgba(15,15,15,0.95);
 
     border:
     2px solid rgba(255,255,255,0.08);
 
     border-radius:20px;
 
-    padding:25px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-
-    flex-wrap:wrap;
+    overflow:hidden;
 }
 
-.modName{
+.modImage{
+
+    width:100%;
+
+    height:240px;
+
+    object-fit:cover;
+}
+
+.modInfo{
+
+    padding:25px;
+}
+
+.modTitle{
 
     color:#55ff55;
 
     font-size:14px;
+
+    margin-bottom:20px;
 }
 
-/* ========================= */
-/* ACCIONES */
-/* ========================= */
+.modDescription{
 
-.actions{
+    font-size:8px;
 
-    display:flex;
+    line-height:1.8;
 
-    gap:10px;
+    opacity:0.8;
 
-    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
-.delete{
+iframe{
 
-    background:
-    linear-gradient(
-    135deg,
-    #ff0055,
-    #ff4d88
-    );
+    width:100%;
+
+    height:220px;
+
+    border:none;
+
+    border-radius:10px;
+
+    margin-bottom:20px;
 }
 
-.verify{
+.modType{
 
-    background:
-    linear-gradient(
-    135deg,
-    #00aa55,
-    #55ff55
-    );
+    margin-bottom:20px;
+
+    color:#c77dff;
+
+    font-size:8px;
 }
 
 /* ========================= */
@@ -264,14 +288,10 @@ button:hover{
         padding:20px;
     }
 
-    .modItem{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
 }
 
 </style>
+
 </head>
 
 <body>
@@ -323,7 +343,7 @@ BEDROCK
 
 </select>
 
-<button id="publish">
+<button id="publishBtn">
 PUBLISH MOD
 </button>
 
@@ -331,76 +351,33 @@ PUBLISH MOD
 
 </section>
 
+<!-- ========================= -->
+<!-- FIREBASE -->
+<!-- ========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+
 <script>
 
 /* ========================= */
-/* GUARDAR */
+/* LCK */
 /* ========================= */
 
-let mods =
-JSON.parse(
-localStorage.getItem("underworldMods")
-) || [];
+const lck =
+prompt("ENTER LCK");
 
-/* ========================= */
-/* RENDER */
-/* ========================= */
+if(lck !== "LCK-UNDERWORLD"){
 
-function renderMods(){
+    alert("ACCESS DENIED");
 
-    const modsList =
-    document.getElementById("modsList");
-
-    modsList.innerHTML = "";
-
-    mods.forEach((mod,index)=>{
-
-        modsList.innerHTML += `
-
-        <div class="modItem">
-
-            <div>
-
-                <div class="modName">
-                ${mod.title}
-                </div>
-
-                <div style="
-                margin-top:15px;
-                font-size:8px;
-                opacity:0.7;
-                line-height:1.8;
-                ">
-
-                ${mod.description}
-
-                </div>
-
-            </div>
-
-            <div class="actions">
-
-                <button
-                class="verify"
-                onclick="verifyMod(${index})"
-                >
-                VERIFY
-                </button>
-
-                <button
-                class="delete"
-                onclick="deleteMod(${index})"
-                >
-                DELETE
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
+    window.location.href =
+    "menu.html";
 
 }
 
@@ -408,8 +385,8 @@ function renderMods(){
 /* PUBLICAR */
 /* ========================= */
 
-document.getElementById("publish")
-.onclick = ()=>{
+document.getElementById("publishBtn")
+.onclick = async ()=>{
 
     const title =
     document.getElementById("modTitle").value;
@@ -436,69 +413,102 @@ document.getElementById("publish")
         return;
     }
 
-    mods.push({
+    await db.collection("mods")
+    .add({
 
         title,
         description,
         image,
         video,
         type,
-        verified:false
+        likes:0,
+        favorites:0,
+        downloads:0,
+        createdAt:
+        new Date()
 
     });
-
-    localStorage.setItem(
-    "underworldMods",
-    JSON.stringify(mods)
-    );
-
-    renderMods();
 
     alert("MOD PUBLISHED");
 
 };
 
 /* ========================= */
-/* ELIMINAR */
+/* RENDER MODS */
 /* ========================= */
 
-function deleteMod(index){
+db.collection("mods")
+.orderBy("createdAt","desc")
 
-    mods.splice(index,1);
+.onSnapshot(snapshot=>{
 
-    localStorage.setItem(
-    "underworldMods",
-    JSON.stringify(mods)
-    );
+    const modsList =
+    document.getElementById("modsList");
 
-    renderMods();
+    modsList.innerHTML = "";
+
+    snapshot.forEach(doc=>{
+
+        const mod =
+        doc.data();
+
+        modsList.innerHTML += `
+
+        <div class="modCard">
+
+            <img
+            class="modImage"
+            src="${mod.image}"
+            >
+
+            <div class="modInfo">
+
+                <div class="modTitle">
+                ${mod.title}
+                </div>
+
+                <div class="modDescription">
+                ${mod.description}
+                </div>
+
+                <div class="modType">
+                ${mod.type.toUpperCase()}
+                </div>
+
+                <iframe
+                src="${mod.video}">
+                </iframe>
+
+                <button
+                class="deleteBtn"
+                onclick="deleteMod('${doc.id}')"
+                >
+                DELETE
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+});
+
+/* ========================= */
+/* DELETE */
+/* ========================= */
+
+async function deleteMod(id){
+
+    await db.collection("mods")
+    .doc(id)
+    .delete();
+
+    alert("MOD DELETED");
 
 }
-
-/* ========================= */
-/* VERIFICAR */
-/* ========================= */
-
-function verifyMod(index){
-
-    mods[index].verified = true;
-
-    localStorage.setItem(
-    "underworldMods",
-    JSON.stringify(mods)
-    );
-
-    renderMods();
-
-    alert("MOD VERIFIED");
-
-}
-
-/* ========================= */
-/* INICIAR */
-/* ========================= */
-
-renderMods();
 
 </script>
 
